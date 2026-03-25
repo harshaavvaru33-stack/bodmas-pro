@@ -1,14 +1,14 @@
+// GLOBAL STATE
 let currentUser = "";
 let selectedLevel = null;
 let score = 0, correctAnswer;
 let timer = null, timeLeft = 30;
-let qCount = 0, maxQ = 15;
+let qCount = 0, maxQ = 10;
 let answered = false;
 let streak = 0;
-let lastQuestion = "";
 let hintUsed = false;
 
-/* DOM */
+// DOM
 const scoreEl = document.getElementById("score");
 const question = document.getElementById("question");
 const options = document.getElementById("options");
@@ -21,7 +21,7 @@ const leaderboard = document.getElementById("leaderboard");
 const userName = document.getElementById("userName");
 const streakEl = document.getElementById("streak");
 
-/* LOAD */
+// LOAD
 window.onload = () => {
     show("auth");
 
@@ -33,26 +33,28 @@ window.onload = () => {
     }
 };
 
-/* SCREEN */
+// SCREEN SWITCH
 function show(id) {
     document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
     document.getElementById(id).classList.add("active");
 }
 
-/* AUTH */
+// AUTH UI
 function showRegister() {
-    authTitle.innerText = "Register";
-    loginForm.classList.add("hidden");
-    registerForm.classList.remove("hidden");
+    document.getElementById("authTitle").innerText = "Register";
+    document.getElementById("loginForm").classList.add("hidden");
+    document.getElementById("registerForm").classList.remove("hidden");
 }
 function showLogin() {
-    authTitle.innerText = "Login";
-    loginForm.classList.remove("hidden");
-    registerForm.classList.add("hidden");
+    document.getElementById("authTitle").innerText = "Login";
+    document.getElementById("loginForm").classList.remove("hidden");
+    document.getElementById("registerForm").classList.add("hidden");
 }
 
-/* REGISTER */
-function register() {
+// REGISTER
+function register(e) {
+    e?.preventDefault();
+
     let name = rName.value.trim();
     let email = rEmail.value.trim();
     let pass = rPass.value;
@@ -62,17 +64,19 @@ function register() {
     if (pass !== cpass) return alert("Passwords mismatch");
 
     let users = JSON.parse(localStorage.getItem("users") || "{}");
-    if (users[email]) return alert("User exists");
+    if (users[email]) return alert("User already exists");
 
     users[email] = { name, pass };
     localStorage.setItem("users", JSON.stringify(users));
 
-    alert("Registered!");
+    alert("Registered successfully!");
     showLogin();
 }
 
-/* LOGIN */
-function login() {
+// LOGIN
+function login(e) {
+    e?.preventDefault();
+
     let email = lEmail.value.trim();
     let pass = lPass.value;
 
@@ -83,23 +87,25 @@ function login() {
         userName.innerText = currentUser;
         localStorage.setItem("sessionUser", currentUser);
         show("home");
-    } else alert("Invalid login");
+    } else {
+        alert("Invalid login");
+    }
 }
 
-/* LOGOUT */
+// LOGOUT
 function logout() {
     localStorage.removeItem("sessionUser");
     show("auth");
 }
 
-/* LEVEL */
-function setLevel(btn, l) {
-    selectedLevel = l;
+// LEVEL SELECT
+function setLevel(btn, level) {
+    selectedLevel = level;
     document.querySelectorAll(".levels button").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 }
 
-/* START */
+// START GAME
 function startGame() {
     if (!selectedLevel) return alert("Select level");
 
@@ -107,13 +113,13 @@ function startGame() {
     qCount = 0;
     streak = 0;
 
-    // 🔥 questions
-    if (selectedLevel === "easy") maxQ = 5;
-    else if (selectedLevel === "medium") maxQ = 8;
-    else if (selectedLevel === "hard") maxQ = 10;
-    else maxQ = Infinity; // ♾️ endless
+    if (selectedLevel === "easy") maxQ = 10;
+    else if (selectedLevel === "medium") maxQ = 12;
+    else if (selectedLevel === "hard") maxQ = 15;
+    else maxQ = Infinity;
+
     document.getElementById("endBtn").style.display =
-        selectedLevel === "endless" ? "block" : "none";
+        selectedLevel === "endless" ? "inline-block" : "none";
 
     scoreEl.innerText = 0;
     streakEl.innerText = 0;
@@ -123,12 +129,12 @@ function startGame() {
     nextQ();
 }
 
-/* RANDOM */
+// RANDOM
 function rand(a, b) {
     return Math.floor(Math.random() * (b - a + 1)) + a;
 }
 
-/* QUESTION */
+// GENERATE QUESTION
 function genQ() {
     answered = false;
     hintUsed = false;
@@ -137,13 +143,10 @@ function genQ() {
     let a = rand(1, 10), b = rand(1, 10), c = rand(1, 10);
 
     let ops = selectedLevel === "easy" ? ["+", "-"] :
-        selectedLevel === "medium" ? ["+", "-", "*"] :
-            ["+", "-", "*"];
+              selectedLevel === "medium" ? ["+", "-", "*"] :
+              ["+", "-", "*"];
 
-    let op1 = ops[rand(0, ops.length - 1)];
-    let op2 = ops[rand(0, ops.length - 1)];
-
-    let exp = `${a} ${op1} ${b} ${op2} ${c}`;
+    let exp = `${a} ${ops[rand(0, ops.length - 1)]} ${b} ${ops[rand(0, ops.length - 1)]} ${c}`;
     question.innerText = exp;
 
     correctAnswer = Math.round(eval(exp));
@@ -155,6 +158,7 @@ function genQ() {
     }
 
     options.innerHTML = "";
+
     [...set].sort(() => Math.random() - 0.5).forEach(v => {
         let btn = document.createElement("button");
         btn.innerText = v;
@@ -165,12 +169,12 @@ function genQ() {
     steps.innerText = "";
 }
 
-/* EXPLANATION (🔥 NEW) */
-function explain(exp) {
-    return `Step: Solve multiplication first → then addition/subtraction (BODMAS)\nAnswer = ${correctAnswer}`;
+// EXPLANATION
+function explain() {
+    return `BODMAS rule → multiply first, then add/subtract\nAnswer = ${correctAnswer}`;
 }
 
-/* CHECK */
+// CHECK ANSWER
 function check(val, btn) {
     if (answered) return;
     answered = true;
@@ -192,7 +196,7 @@ function check(val, btn) {
         btn.style.background = "red";
         wrongSound?.play();
 
-        steps.innerText = explain(question.innerText);
+        steps.innerText = explain();
         nextBtn.classList.remove("hidden");
     }
 
@@ -200,34 +204,29 @@ function check(val, btn) {
     streakEl.innerText = streak;
 }
 
-/* NEXT */
+// NEXT QUESTION
 function nextQ() {
-
-    if (selectedLevel !== "endless" && qCount >= maxQ) {
-        return endGame();
-    }
+    if (selectedLevel !== "endless" && qCount >= maxQ) return endGame();
 
     qCount++;
 
     if (selectedLevel !== "endless") {
         prog.style.width = (qCount / maxQ * 100) + "%";
     } else {
-        prog.style.width = "100%"; // full always
+        prog.style.width = "100%";
     }
 
     genQ();
     startTimer();
 }
 
-/* TIMER FIX 🔥 */
+// TIMER
 function startTimer() {
     clearInterval(timer);
 
-    // 🔥 level based time
-    if (selectedLevel === "easy") timeLeft = 30;
-    else if (selectedLevel === "medium") timeLeft = 25;
-    else if (selectedLevel === "hard") timeLeft = 20;
-    else timeLeft = 15; // endless
+    timeLeft = selectedLevel === "easy" ? 30 :
+               selectedLevel === "medium" ? 25 :
+               selectedLevel === "hard" ? 20 : 15;
 
     time.innerText = timeLeft;
     time.style.color = "white";
@@ -240,10 +239,9 @@ function startTimer() {
 
         if (timeLeft <= 0) {
             clearInterval(timer);
-
             answered = true;
 
-            steps.innerText = "⏰ Time up!\nCorrect Answer = " + correctAnswer;
+            steps.innerText = "⏰ Time up!\nAnswer = " + correctAnswer;
 
             document.querySelectorAll("#options button").forEach(b => {
                 b.disabled = true;
@@ -255,33 +253,30 @@ function startTimer() {
     }, 1000);
 }
 
-/* HINT IMPROVED 🔥 */
+// HINT
 function useHint() {
     if (hintUsed) return;
     hintUsed = true;
 
-    let btns = [...document.querySelectorAll("#options button")];
     let removed = 0;
 
-    btns.forEach(b => {
+    document.querySelectorAll("#options button").forEach(b => {
         if (+b.innerText !== correctAnswer && removed < 2) {
-            b.style.opacity = "0.2";
+            b.style.opacity = "0.3";
             b.disabled = true;
             removed++;
         }
     });
 }
 
-/* END */
+// END GAME
 function endGame() {
-
-    clearInterval(timer); // 🔥 important fix
-
+    clearInterval(timer);
     show("result");
 
     let scores = JSON.parse(localStorage.getItem("scores") || "[]");
-    scores.push({ name: currentUser, score });
 
+    scores.push({ name: currentUser, score });
     scores.sort((a, b) => b.score - a.score);
     scores = scores.slice(0, 5);
 
@@ -292,15 +287,10 @@ function endGame() {
     leaderboard.innerHTML = scores.map((s, i) =>
         `<div>${i + 1}. ${s.name} - ${s.score}</div>`
     ).join("");
-    if (selectedLevel === "endless") {
-        document.getElementById("endBtn").style.display = "inline-block";
-    } else {
-        document.getElementById("endBtn").style.display = "none";
-    }
 }
 
-/* NAV */
+// NAV
 function goHome() {
-    clearInterval(timer); // 🔥 important
+    clearInterval(timer);
     show("home");
 }
