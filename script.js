@@ -74,17 +74,20 @@ function register(e) {
 
 // LOGIN
 function login(e) {
-    e.preventDefault();
+    e?.preventDefault();
 
-    let email = document.getElementById("lEmail").value;
+    let email = document.getElementById("lEmail").value.trim();
     let pass = document.getElementById("lPass").value;
 
     let users = JSON.parse(localStorage.getItem("users") || "{}");
 
     if (users[email] && users[email].pass === pass) {
         currentUser = users[email].name;
-        userName.innerText = currentUser;
+
+        document.getElementById("userName").innerText = currentUser;
+
         localStorage.setItem("sessionUser", currentUser);
+
         show("home");
     } else {
         alert("Invalid login");
