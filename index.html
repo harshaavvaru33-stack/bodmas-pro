@@ -22,21 +22,21 @@
         <div id="auth" class="card active">
             <h2 id="authTitle">Login</h2>
 
-            <div id="loginForm" onsubmit="login(event)">
+            <form id="loginForm" onsubmit="login(event)">
                 <input id="lEmail" placeholder="Email">
                 <input id="lPass" type="password" placeholder="Password">
                 <button type="submit">Login</button>
                 <p onclick="showRegister()">Create account</p>
-            </div>
+            </form>    
 
-            <div id="registerForm" class="hidden" onsubmit="register(event)">
+            <form id="registerForm" class="hidden" onsubmit="register(event)">
                 <input id="rName" placeholder="Name">
                 <input id="rEmail" placeholder="Email">
                 <input id="rPass" type="password" placeholder="Password">
                 <input id="rCpass" type="password" placeholder="Confirm Password">
                 <button type="submit">Register</button>
                 <p onclick="showLogin()">Back to login</p>
-            </div>
+            </form>    
         </div>
 
         <!-- HOME -->
