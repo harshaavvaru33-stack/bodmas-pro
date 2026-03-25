@@ -9,14 +9,14 @@
 
 <body>
 
-    <!-- HEADER -->
-    <div id="appHeader" class="header">
-        <h1>🧠 BODMAS PRO</h1>
-        <p class="tagline">Train your brain with math ⚡</p>
-    </div>
-
-    <!-- MAIN APP -->
+    <!-- MAIN APP (🔥 EVERYTHING INSIDE THIS) -->
     <div class="app">
+
+        <!-- HEADER -->
+        <div id="appHeader" class="header">
+            <h1>🧠 BODMAS PRO</h1>
+            <p class="tagline">Train your brain with math ⚡</p>
+        </div>
 
         <!-- AUTH -->
         <div id="auth" class="card active">
@@ -44,7 +44,7 @@
             <h3>Welcome 👋 <span id="userName"></span></h3>
 
             <h4>Select Level</h4>
-            
+
             <div class="levels">
                 <button onclick="setLevel(this,'easy')">Easy</button>
                 <button onclick="setLevel(this,'medium')">Medium</button>
@@ -80,21 +80,17 @@
 
             <div id="steps"></div>
 
-        <div class="game-actions">
-        
-            <!-- LEFT SIDE -->
-            <button onclick="goHome()">⬅ Back</button>
-        
-            <!-- CENTER -->
-            <button onclick="useHint()">💡 Hint</button>
-        
-            <!-- RIGHT SIDE -->
-            <button id="endBtn" onclick="endGame()">⛔ End</button>
-        
-            <!-- NEXT (ONLY WHEN WRONG) -->
-            <button id="nextBtn" onclick="nextQ()" class="hidden">➡ Next</button>
-        
-        </div>
+            <div class="game-actions">
+
+                <button onclick="goHome()">⬅ Back</button>
+
+                <button onclick="useHint()">💡 Hint</button>
+
+                <button id="endBtn" onclick="endGame()">⛔ End</button>
+
+                <button id="nextBtn" onclick="nextQ()" class="hidden">➡ Next</button>
+
+            </div>
 
         </div>
 
@@ -113,11 +109,11 @@
             </div>
         </div>
 
-    </div>
+        <!-- FOOTER (🔥 FIXED POSITION INSIDE APP) -->
+        <div class="footer">
+            ⚡ Built with ❤️ by Harsha | BODMAS Trainer
+        </div>
 
-    <!-- FOOTER -->
-    <div class="footer">
-        ⚡ Built with ❤️ by Harsha | BODMAS Trainer
     </div>
 
     <!-- SOUNDS -->
