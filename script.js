@@ -53,24 +53,44 @@ function showLogin() {
 
 // REGISTER
 function register(e) {
-    e.preventDefault();
+    e?.preventDefault();
 
-    let name = document.getElementById("rName").value;
-    let email = document.getElementById("rEmail").value;
+    let name = document.getElementById("rName").value.trim();
+    let email = document.getElementById("rEmail").value.trim();
     let pass = document.getElementById("rPass").value;
+    let cpass = document.getElementById("rCpass").value; // 🔥 FIX
 
-    if (!name || !email || !pass) return alert("Fill all fields");
-    if (pass !== cpass) return alert("Passwords mismatch");
+    if (!name || !email || !pass || !cpass) {
+        alert("Fill all fields");
+        return;
+    }
+
+    if (pass !== cpass) {
+        alert("Passwords do not match");
+        return;
+    }
 
     let users = JSON.parse(localStorage.getItem("users") || "{}");
-    if (users[email]) return alert("User already exists");
+
+    if (users[email]) {
+        alert("User already exists");
+        return;
+    }
 
     users[email] = { name, pass };
     localStorage.setItem("users", JSON.stringify(users));
 
     alert("Registered successfully!");
+
+    // 🔥 CLEAR FIELDS
+    document.getElementById("rName").value = "";
+    document.getElementById("rEmail").value = "";
+    document.getElementById("rPass").value = "";
+    document.getElementById("rCpass").value = "";
+
     showLogin();
 }
+
 
 // LOGIN
 function login(e) {
@@ -78,6 +98,11 @@ function login(e) {
 
     let email = document.getElementById("lEmail").value.trim();
     let pass = document.getElementById("lPass").value;
+
+    if (!email || !pass) {
+        alert("Enter email and password");
+        return;
+    }
 
     let users = JSON.parse(localStorage.getItem("users") || "{}");
 
@@ -88,12 +113,15 @@ function login(e) {
 
         localStorage.setItem("sessionUser", currentUser);
 
+        // 🔥 CLEAR FIELDS
+        document.getElementById("lEmail").value = "";
+        document.getElementById("lPass").value = "";
+
         show("home");
     } else {
         alert("Invalid login");
     }
 }
-
 // LOGOUT
 function logout() {
     localStorage.removeItem("sessionUser");
