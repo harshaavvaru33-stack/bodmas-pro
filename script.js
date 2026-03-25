@@ -53,12 +53,11 @@ function showLogin() {
 
 // REGISTER
 function register(e) {
-    e?.preventDefault();
+    e.preventDefault();
 
-    let name = rName.value.trim();
-    let email = rEmail.value.trim();
-    let pass = rPass.value;
-    let cpass = rCpass.value;
+    let name = document.getElementById("rName").value;
+    let email = document.getElementById("rEmail").value;
+    let pass = document.getElementById("rPass").value;
 
     if (!name || !email || !pass) return alert("Fill all fields");
     if (pass !== cpass) return alert("Passwords mismatch");
@@ -75,10 +74,10 @@ function register(e) {
 
 // LOGIN
 function login(e) {
-    e?.preventDefault();
+    e.preventDefault();
 
-    let email = lEmail.value.trim();
-    let pass = lPass.value;
+    let email = document.getElementById("lEmail").value;
+    let pass = document.getElementById("lPass").value;
 
     let users = JSON.parse(localStorage.getItem("users") || "{}");
 
