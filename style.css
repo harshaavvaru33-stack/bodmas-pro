@@ -11,6 +11,11 @@ body {
     min-height: 100vh;
     overflow: hidden;
 }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* BACKGROUND GLOW */
 body::before {
@@ -146,6 +151,9 @@ button {
     box-shadow: 0 0 15px #00f7ff;
     transform: scale(1);
     /* 🔥 prevent jump */
+}
+.levels button {
+    min-width: 80px;
 }
 
 /* TOP BAR */
