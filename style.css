@@ -1,0 +1,309 @@
+/* GLOBAL */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #111, #0f0f0f 70%);
+    color: white;
+
+    display: grid;
+    place-items: center;
+
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* BACKGROUND GLOW */
+body::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: #00f7ff;
+    filter: blur(150px);
+    opacity: 0.15;
+    top: -50px;
+    left: -50px;
+}
+
+.header {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    left: 0;
+}
+
+/* APP (CENTER STACK FIX 🔥) */
+.app {
+    width: 95%;
+    max-width: 380px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 15px;
+    z-index: 2;
+}
+
+/* CARD */
+.card {
+    display: none;
+    width: 100%;
+    /* 🔥 alignment fix */
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    box-shadow:
+        0 0 30px rgba(0, 255, 255, 0.15),
+        inset 0 0 10px rgba(255, 255, 255, 0.05);
+    text-align: center;
+    animation: fade 0.4s ease;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.25),
+        inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ANIMATION */
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* INPUT */
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #0c0c0c;
+    /* 🔥 improved contrast */
+    color: white;
+    transition: 0.3s;
+}
+
+input::placeholder {
+    color: #888;
+}
+
+input:focus {
+    box-shadow: 0 0 12px #00f7ff;
+    transform: scale(1.02);
+}
+
+/* BUTTON */
+button {
+    padding: 10px;
+    margin: 6px;
+    border: none;
+    border-radius: 10px;
+    background: #111;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* BUTTON HOVER */
+button:hover {
+    transform: translateY(-2px);
+    /* 🔥 no side shift */
+}
+
+/* BUTTON CLICK */
+button:active {
+    transform: scale(0.93);
+}
+button {
+    transition: all 0.25s ease;
+}
+/* LEVEL BUTTON ACTIVE */
+.levels button.active {
+    background: linear-gradient(45deg, #00f7ff, #00ff99);
+    color: black;
+    box-shadow: 0 0 15px #00f7ff;
+    transform: scale(1);
+    /* 🔥 prevent jump */
+}
+
+/* TOP BAR */
+.top {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* STREAK */
+.subTop {
+    margin-top: 5px;
+    color: #00f7ff;
+    font-size: 14px;
+    text-shadow: 0 0 8px #00f7ff;
+}
+
+/* PROGRESS */
+.bar {
+    height: 8px;
+    background: #222;
+    margin: 12px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#prog {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00f7ff, #00ff99);
+    transition: width 0.4s ease;
+    box-shadow: 0 0 10px #00f7ff;
+}
+
+/* QUESTION */
+#question {
+    margin: 15px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* OPTIONS */
+#options button {
+    width: 100%;
+    background: #1e1e1e;
+    color: white;
+    transition: 0.2s;
+    position: relative;
+}
+
+#options button:hover {
+    background: #00f7ff;
+    color: black;
+    box-shadow: 0 0 10px #00f7ff;
+}
+
+/* CLICK EFFECT */
+#options button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: rgba(0, 255, 255, 0.1);
+    opacity: 0;
+    transition: 0.2s;
+}
+
+#options button:active::after {
+    opacity: 1;
+}
+
+/* EXPLANATION */
+#steps {
+    margin-top: 10px;
+    color: #00f7ff;
+    font-size: 0.9rem;
+    min-height: 20px;
+    text-shadow: 0 0 6px rgba(0, 255, 255, 0.5);
+}
+
+/* ACTION BUTTONS */
+.game-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* HOME */
+.home-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* LEADERBOARD */
+.leaderboard-box {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+}
+
+.leaderboard-box div {
+    padding: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* FOOTER CENTER FIX 🔥 */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* MOBILE */
+@media(max-width:500px) {
+    body {
+        padding: 10px;
+    }
+}
+.levels {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.levels button {
+    flex: 1;
+    min-width: 90px;
+    max-width: 110px;
+}
+.game-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.game-actions button {
+    flex: 1;
+    min-width: 70px;
+}
+
+#game {
+    display: none;
+}
+
+#game.active {
+    display: block;
+}
+
+#game:not(.active) #question,
+#game:not(.active) #options,
+#game:not(.active) #steps {
+    display: none;
+}

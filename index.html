@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODMAS PRO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="appHeader" class="header">
+        <h1>🧠 BODMAS PRO</h1>
+        <p class="tagline">Train your brain with math ⚡</p>
+    </div>
+
+    <!-- MAIN APP -->
+    <div class="app">
+
+        <!-- AUTH -->
+        <div id="auth" class="card active">
+            <h2 id="authTitle">Login</h2>
+
+            <div id="loginForm">
+                <input id="lEmail" placeholder="Email">
+                <input id="lPass" type="password" placeholder="Password">
+                <button onclick="login()">Login</button>
+                <p onclick="showRegister()">Create account</p>
+            </div>
+
+            <div id="registerForm" class="hidden">
+                <input id="rName" placeholder="Name">
+                <input id="rEmail" placeholder="Email">
+                <input id="rPass" type="password" placeholder="Password">
+                <input id="rCpass" type="password" placeholder="Confirm Password">
+                <button onclick="register()">Register</button>
+                <p onclick="showLogin()">Back to login</p>
+            </div>
+        </div>
+
+        <!-- HOME -->
+        <div id="home" class="card">
+            <h3>Welcome 👋 <span id="userName"></span></h3>
+
+            <h4>Select Level</h4>
+            
+            <div class="levels">
+                <button onclick="setLevel(this,'easy')">Easy</button>
+                <button onclick="setLevel(this,'medium')">Medium</button>
+                <button onclick="setLevel(this,'hard')">Hard</button>
+                <button onclick="setLevel(this,'endless')">Endless ♾️</button>
+            </div>
+
+            <div class="home-actions">
+                <button onclick="startGame()">🎮 Play</button>
+                <button onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+
+        <!-- GAME -->
+        <div id="game" class="card">
+
+            <div class="top">
+                <div>Score: <span id="score">0</span></div>
+                <div>⏱ <span id="time">30</span>s</div>
+            </div>
+
+            <div class="subTop">
+                🔥 Streak: <span id="streak">0</span>
+            </div>
+
+            <div class="bar">
+                <div id="prog"></div>
+            </div>
+
+            <h2 id="question"></h2>
+
+            <div id="options"></div>
+
+            <div id="steps"></div>
+
+        <div class="game-actions">
+        
+            <!-- LEFT SIDE -->
+            <button onclick="goHome()">⬅ Back</button>
+        
+            <!-- CENTER -->
+            <button onclick="useHint()">💡 Hint</button>
+        
+            <!-- RIGHT SIDE -->
+            <button id="endBtn" onclick="endGame()">⛔ End</button>
+        
+            <!-- NEXT (ONLY WHEN WRONG) -->
+            <button id="nextBtn" onclick="nextQ()" class="hidden">➡ Next</button>
+        
+        </div>
+
+        </div>
+
+        <!-- RESULT -->
+        <div id="result" class="card">
+            <h2 id="final">Your Score</h2>
+
+            <div class="leaderboard-box">
+                <h3>🏆 Leaderboard</h3>
+                <div id="leaderboard"></div>
+            </div>
+
+            <div class="home-actions">
+                <button onclick="goHome()">⬅ Back</button>
+                <button onclick="startGame()">🔁 Play Again</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        ⚡ Built with ❤️ by Harsha | BODMAS Trainer
+    </div>
+
+    <!-- SOUNDS -->
+    <audio id="correctSound" preload="auto"
+        src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3"></audio>
+
+    <audio id="wrongSound" preload="auto"
+        src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
