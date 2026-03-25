@@ -2,12 +2,12 @@
 
 Train your brain with math ⚡
 
-BODMAS PRO is an interactive web-based math game designed to improve your calculation speed using BODMAS rules. Built with pure HTML, CSS, and JavaScript, it delivers a clean UI and engaging gameplay experience.
+BODMAS PRO is an interactive web-based math game designed to improve your calculation speed using BODMAS rules. Built using pure HTML, CSS, and JavaScript, it provides a clean UI and engaging gameplay experience.
 
 ---
 
 ## 🚀 Live Demo
-👉 https://yourusername.github.io/bodmas-pro/
+👉 https://harshaavvaru33-stack.github.io/bodmas-pro/
 
 ---
 
@@ -21,90 +21,87 @@ BODMAS PRO is an interactive web-based math game designed to improve your calcul
 
 - ⏱️ Timer-based gameplay  
 - 💡 Smart Hint system  
-- 📘 Step-by-step explanation  
+- 📘 Step-by-step explanation (BODMAS logic)  
 - 🔥 Score & streak tracking  
-- 🏆 Leaderboard (localStorage)  
+- 🏆 Leaderboard (Top scores using LocalStorage)  
 - 🎮 Endless mode (play until you fail)  
-- 🎨 Modern Glass UI design  
+- 🔐 Login & Register system (LocalStorage-based)  
+- 🎨 Modern Glassmorphism UI  
 
 ---
 
 ## 🧩 How It Works
 
-- Random math expressions are generated  
-- User selects correct answer based on BODMAS  
-- Correct answer → next question automatically  
-- Wrong answer → explanation shown  
-- Timer runs for each question  
-- Score is tracked and saved  
+- Random math expressions are generated dynamically  
+- Questions follow BODMAS rules  
+- User selects the correct answer  
+- ✅ Correct → moves to next question automatically  
+- ❌ Wrong → explanation is shown  
+- ⏱ Timer runs for each question  
+- 💡 Hints remove wrong options  
+- 📊 Score and streak are tracked  
+- 🏆 Top scores saved in leaderboard  
 
 ---
 
 ## 🛠️ Tech Stack
 
 - HTML5  
-- CSS3 (Glassmorphism UI)  
+- CSS3 (Glassmorphism UI + Animations)  
 - JavaScript (Vanilla JS)  
-- LocalStorage (for user & leaderboard)
+- LocalStorage (Authentication + Leaderboard)
 
 ---
 
 ## 📂 Project Structure
-# 🧠 BODMAS PRO
-
-Train your brain with math ⚡
-
-BODMAS PRO is an interactive web-based math game designed to improve your calculation speed using BODMAS rules. Built with pure HTML, CSS, and JavaScript, it delivers a clean UI and engaging gameplay experience.
-
----
-
-## 🚀 Live Demo
-👉 https://yourusername.github.io/bodmas-pro/
-
----
-
-## ✨ Features
-
-- 🎯 Multiple Levels  
-  - Easy  
-  - Medium  
-  - Hard  
-  - Endless ♾️  
-
-- ⏱️ Timer-based gameplay  
-- 💡 Smart Hint system  
-- 📘 Step-by-step explanation  
-- 🔥 Score & streak tracking  
-- 🏆 Leaderboard (localStorage)  
-- 🎮 Endless mode (play until you fail)  
-- 🎨 Modern Glass UI design  
-
----
-
-## 🧩 How It Works
-
-- Random math expressions are generated  
-- User selects correct answer based on BODMAS  
-- Correct answer → next question automatically  
-- Wrong answer → explanation shown  
-- Timer runs for each question  
-- Score is tracked and saved  
-
----
-
-## 🛠️ Tech Stack
-
-- HTML5  
-- CSS3 (Glassmorphism UI)  
-- JavaScript (Vanilla JS)  
-- LocalStorage (for user & leaderboard)
-
----
-
-## 📂 Project Structure
-bodmas/
+bodmas-pro/
 │
-├── index.html
-├── style.css
-├── script.js
-└── README.md
+├── index.html # UI structure
+├── style.css # Styling & animations
+├── script.js # Game logic
+└── README.md # Documentation
+
+---
+
+## ⚡ Installation & Usage
+
+1. Clone the repository:
+
+---
+git clone https://github.com/harshaavvaru33-stack/bodmas-pro.git
+
+2. Open the folder
+
+3. Run the project:
+
+---
+
+## 🎯 Future Improvements
+
+- 🔊 Sound toggle option  
+- 💰 Coins / reward system  
+- 🔒 Level unlock system  
+- 🌐 Online leaderboard (Firebase)  
+- 📱 Mobile app version (PWA / APK)  
+- 🎨 Theme switch (Dark / Light mode)  
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!  
+Feel free to fork the repo and submit improvements.
+
+---
+
+## ❤️ Author
+
+Built with ❤️ by **Harsha**
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
+
+---
